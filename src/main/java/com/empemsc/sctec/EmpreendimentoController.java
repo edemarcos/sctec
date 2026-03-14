@@ -1,8 +1,15 @@
 package com.empemsc.sctec;
 
+import com.empemsc.sctec.dto.AtualizarEmpreendimentoDTO;
+import com.empemsc.sctec.dto.CriarEmpreendimentoDTO;
+import com.empemsc.sctec.dto.EmpreendimentoResponseDTO;
+import com.empemsc.sctec.service.EmpreendimentoService;
+import com.empemsc.sctec.config.response.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,38 +19,48 @@ import java.util.List;
 @Tag(name = "Empreendimentos", description = "Endpoints para gerenciamento de empreendimentos")
 public class EmpreendimentoController {
 
-    @Autowired
-    private EmpreendimentoRepository repository;
+    private final EmpreendimentoService service;
+
+    public EmpreendimentoController(EmpreendimentoService service) {
+        this.service = service;
+    }
 
     @PostMapping
     @Operation(summary = "Criar empreendimento", description = "Cria um novo empreendimento no sistema")
-    public Empreendimento salvar(@RequestBody Empreendimento empreendimento) {
-        return repository.save(empreendimento);
+    public ResponseEntity<ApiResponse<EmpreendimentoResponseDTO>> salvar(@RequestBody @Valid CriarEmpreendimentoDTO dto) {
+        EmpreendimentoResponseDTO salvo = service.salvar(dto);
+        return new ResponseEntity<>(ApiResponse.success(salvo), HttpStatus.CREATED);
     }
 
     @GetMapping
     @Operation(summary = "Listar empreendimentos", description = "Retorna uma lista com todos os empreendimentos cadastrados")
-    public List<Empreendimento> listar() {
-        return repository.findAll();
+    public ResponseEntity<ApiResponse<List<EmpreendimentoResponseDTO>>> listar() {
+        List<EmpreendimentoResponseDTO> empreendimentos = service.listar();
+        return ResponseEntity.ok(ApiResponse.success(empreendimentos));
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Buscar empreendimento por ID", description = "Retorna um empreendimento pelo seu ID")
-    public Empreendimento buscarPorId(@PathVariable Long id) {
-        return repository.findById(id).orElse(null);
+    public ResponseEntity<ApiResponse<EmpreendimentoResponseDTO>> buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id)
+                .map(dto -> ResponseEntity.ok(ApiResponse.success(dto)))
+                .orElse(new ResponseEntity<>(ApiResponse.error("Empreendimento não encontrado."), HttpStatus.NOT_FOUND));
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
     @Operation(summary = "Atualizar empreendimento", description = "Atualiza um empreendimento existente")
-    public Empreendimento atualizar(@PathVariable Long id, @RequestBody Empreendimento empreendimento) {
-        Empreendimento empreendimentoExistente = repository.findById(empreendimento.getId()).orElseThrow();
-        empreendimentoExistente = empreendimento;
-        return repository.save(empreendimentoExistente);
+    public ResponseEntity<ApiResponse<EmpreendimentoResponseDTO>> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizarEmpreendimentoDTO dto) {
+        return service.atualizar(id, dto)
+                .map(updatedDto -> ResponseEntity.ok(ApiResponse.success(updatedDto)))
+                .orElse(new ResponseEntity<>(ApiResponse.error("Empreendimento não encontrado para atualização."), HttpStatus.NOT_FOUND));
     }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Excluir empreendimento", description = "Exclui um empreendimento pelo seu ID")
-    public void excluir(@PathVariable Long id) {
-        repository.deleteById(id);
+    public ResponseEntity<ApiResponse<String>> excluir(@PathVariable Long id) {
+        if (service.excluir(id)) {
+            return ResponseEntity.ok(ApiResponse.success("Empreendimento com ID " + id + " foi excluído com sucesso."));
+        }
+        return new ResponseEntity<>(ApiResponse.error("Empreendimento não encontrado para exclusão."), HttpStatus.NOT_FOUND);
     }
 }
