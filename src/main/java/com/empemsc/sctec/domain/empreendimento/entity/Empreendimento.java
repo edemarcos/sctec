@@ -1,5 +1,6 @@
 package com.empemsc.sctec.domain.empreendimento.entity;
 
+import com.empemsc.sctec.domain.empreendimento.enums.SegmentoAtuacao;
 import com.empemsc.sctec.domain.empreendimento.enums.StatusEmpreendimento;
 import com.empemsc.sctec.domain.socio.entity.Socio;
 import jakarta.persistence.*;
@@ -26,7 +27,8 @@ public class Empreendimento {
     private String nomeEmpreendimento;
     private String nomeEmpreendedor;
     private String municipio;
-    private String segmentoAtuacao;
+    @Enumerated(EnumType.STRING)
+    private SegmentoAtuacao segmentoAtuacao;
     private String email;
     @Enumerated(EnumType.STRING)
     private StatusEmpreendimento status;
