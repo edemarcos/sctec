@@ -1,4 +1,4 @@
-package com.empemsc.sctec.dto;
+package com.empemsc.sctec.domain.empreendimento.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

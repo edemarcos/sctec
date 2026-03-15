@@ -1,4 +1,4 @@
-package com.empemsc.sctec;
+package com.empemsc.sctec.domain.empreendimento.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

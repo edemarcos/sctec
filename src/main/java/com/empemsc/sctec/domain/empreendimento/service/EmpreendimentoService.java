@@ -1,11 +1,11 @@
-package com.empemsc.sctec.service;
+package com.empemsc.sctec.domain.empreendimento.service;
 
-import com.empemsc.sctec.Empreendimento;
-import com.empemsc.sctec.EmpreendimentoRepository;
-import com.empemsc.sctec.dto.AtualizarEmpreendimentoDTO;
-import com.empemsc.sctec.dto.CriarEmpreendimentoDTO;
-import com.empemsc.sctec.dto.EmpreendimentoResponseDTO;
-import com.empemsc.sctec.mapper.EmpreendimentoMapper;
+import com.empemsc.sctec.domain.empreendimento.entity.Empreendimento;
+import com.empemsc.sctec.domain.empreendimento.repository.EmpreendimentoRepository;
+import com.empemsc.sctec.domain.empreendimento.dto.AtualizarEmpreendimentoDTO;
+import com.empemsc.sctec.domain.empreendimento.dto.CriarEmpreendimentoDTO;
+import com.empemsc.sctec.domain.empreendimento.dto.EmpreendimentoResponseDTO;
+import com.empemsc.sctec.domain.empreendimento.mapper.EmpreendimentoMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

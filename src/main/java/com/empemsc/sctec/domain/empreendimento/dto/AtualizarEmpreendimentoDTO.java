@@ -1,7 +1,6 @@
-package com.empemsc.sctec.dto;
+package com.empemsc.sctec.domain.empreendimento.dto;
 
-public record EmpreendimentoResponseDTO(
-        Long id,
+public record AtualizarEmpreendimentoDTO(
         String nomeEmpreendimento,
         String nomeEmpreendedor,
         String municipio,

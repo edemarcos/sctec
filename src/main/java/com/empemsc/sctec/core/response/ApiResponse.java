@@ -1,4 +1,4 @@
-package com.empemsc.sctec.config.response;
+package com.empemsc.sctec.core.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 

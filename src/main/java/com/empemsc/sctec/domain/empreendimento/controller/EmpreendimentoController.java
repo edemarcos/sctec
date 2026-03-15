@@ -1,10 +1,10 @@
-package com.empemsc.sctec;
+package com.empemsc.sctec.domain.empreendimento.controller;
 
-import com.empemsc.sctec.dto.AtualizarEmpreendimentoDTO;
-import com.empemsc.sctec.dto.CriarEmpreendimentoDTO;
-import com.empemsc.sctec.dto.EmpreendimentoResponseDTO;
-import com.empemsc.sctec.service.EmpreendimentoService;
-import com.empemsc.sctec.config.response.ApiResponse;
+import com.empemsc.sctec.domain.empreendimento.dto.AtualizarEmpreendimentoDTO;
+import com.empemsc.sctec.domain.empreendimento.dto.CriarEmpreendimentoDTO;
+import com.empemsc.sctec.domain.empreendimento.dto.EmpreendimentoResponseDTO;
+import com.empemsc.sctec.domain.empreendimento.service.EmpreendimentoService;
+import com.empemsc.sctec.core.response.ApiResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;

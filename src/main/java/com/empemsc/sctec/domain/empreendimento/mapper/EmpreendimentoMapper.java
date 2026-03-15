@@ -1,9 +1,9 @@
-package com.empemsc.sctec.mapper;
+package com.empemsc.sctec.domain.empreendimento.mapper;
 
-import com.empemsc.sctec.Empreendimento;
-import com.empemsc.sctec.dto.AtualizarEmpreendimentoDTO;
-import com.empemsc.sctec.dto.CriarEmpreendimentoDTO;
-import com.empemsc.sctec.dto.EmpreendimentoResponseDTO;
+import com.empemsc.sctec.domain.empreendimento.entity.Empreendimento;
+import com.empemsc.sctec.domain.empreendimento.dto.AtualizarEmpreendimentoDTO;
+import com.empemsc.sctec.domain.empreendimento.dto.CriarEmpreendimentoDTO;
+import com.empemsc.sctec.domain.empreendimento.dto.EmpreendimentoResponseDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;

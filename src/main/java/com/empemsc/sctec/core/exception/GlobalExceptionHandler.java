@@ -1,6 +1,6 @@
-package com.empemsc.sctec.config.exception;
+package com.empemsc.sctec.core.exception;
 
-import com.empemsc.sctec.config.response.ApiResponse;
+import com.empemsc.sctec.core.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
