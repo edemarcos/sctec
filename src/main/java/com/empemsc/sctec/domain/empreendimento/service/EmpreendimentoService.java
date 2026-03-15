@@ -1,11 +1,12 @@
 package com.empemsc.sctec.domain.empreendimento.service;
 
 import com.empemsc.sctec.domain.empreendimento.entity.Empreendimento;
-import com.empemsc.sctec.domain.empreendimento.repository.EmpreendimentoRepository;
 import com.empemsc.sctec.domain.empreendimento.dto.AtualizarEmpreendimentoDTO;
 import com.empemsc.sctec.domain.empreendimento.dto.CriarEmpreendimentoDTO;
 import com.empemsc.sctec.domain.empreendimento.dto.EmpreendimentoResponseDTO;
+import com.empemsc.sctec.domain.empreendimento.enums.StatusEmpreendimento;
 import com.empemsc.sctec.domain.empreendimento.mapper.EmpreendimentoMapper;
+import com.empemsc.sctec.domain.empreendimento.repository.EmpreendimentoRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,9 @@ public class EmpreendimentoService {
     @Transactional
     public EmpreendimentoResponseDTO salvar(CriarEmpreendimentoDTO dto) {
         Empreendimento empreendimento = mapper.toEntity(dto);
+        if (empreendimento.getStatus() == null) {
+            empreendimento.setStatus(StatusEmpreendimento.ATIVO);
+        }
         Empreendimento salvo = repository.save(empreendimento);
         return mapper.toResponseDTO(salvo);
     }
@@ -48,6 +52,22 @@ public class EmpreendimentoService {
         return repository.findById(id).map(empreendimentoExistente -> {
             mapper.updateEntityFromDTO(dto, empreendimentoExistente);
             return mapper.toResponseDTO(empreendimentoExistente);
+        });
+    }
+
+    @Transactional
+    public Optional<EmpreendimentoResponseDTO> ativar(Long id) {
+        return repository.findById(id).map(empreendimento -> {
+            empreendimento.setStatus(StatusEmpreendimento.ATIVO);
+            return mapper.toResponseDTO(empreendimento);
+        });
+    }
+
+    @Transactional
+    public Optional<EmpreendimentoResponseDTO> inativar(Long id) {
+        return repository.findById(id).map(empreendimento -> {
+            empreendimento.setStatus(StatusEmpreendimento.INATIVO);
+            return mapper.toResponseDTO(empreendimento);
         });
     }
 

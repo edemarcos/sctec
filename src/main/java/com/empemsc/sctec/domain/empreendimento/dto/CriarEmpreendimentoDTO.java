@@ -1,5 +1,6 @@
 package com.empemsc.sctec.domain.empreendimento.dto;
 
+import com.empemsc.sctec.domain.empreendimento.enums.StatusEmpreendimento;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -13,6 +14,6 @@ public record CriarEmpreendimentoDTO(
         String segmentoAtuacao,
         @Email
         String email,
-        String status
+        StatusEmpreendimento status
 ) {
 }

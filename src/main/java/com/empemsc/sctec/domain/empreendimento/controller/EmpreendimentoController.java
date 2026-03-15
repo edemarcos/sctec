@@ -55,6 +55,22 @@ public class EmpreendimentoController {
                 .orElse(new ResponseEntity<>(ApiResponse.error("Empreendimento não encontrado para atualização."), HttpStatus.NOT_FOUND));
     }
 
+    @PutMapping("/{id}/ativar")
+    @Operation(summary = "Ativar um empreendimento", description = "Muda o status de um empreendimento para ATIVO.")
+    public ResponseEntity<ApiResponse<EmpreendimentoResponseDTO>> ativar(@PathVariable Long id) {
+        return service.ativar(id)
+                .map(dto -> ResponseEntity.ok(ApiResponse.success(dto)))
+                .orElse(new ResponseEntity<>(ApiResponse.error("Empreendimento não encontrado para ativação."), HttpStatus.NOT_FOUND));
+    }
+
+    @PutMapping("/{id}/inativar")
+    @Operation(summary = "Inativar um empreendimento", description = "Muda o status de um empreendimento para INATIVO.")
+    public ResponseEntity<ApiResponse<EmpreendimentoResponseDTO>> inativar(@PathVariable Long id) {
+        return service.inativar(id)
+                .map(dto -> ResponseEntity.ok(ApiResponse.success(dto)))
+                .orElse(new ResponseEntity<>(ApiResponse.error("Empreendimento não encontrado para inativação."), HttpStatus.NOT_FOUND));
+    }
+
     @DeleteMapping("/{id}")
     @Operation(summary = "Excluir empreendimento", description = "Exclui um empreendimento pelo seu ID")
     public ResponseEntity<ApiResponse<String>> excluir(@PathVariable Long id) {
