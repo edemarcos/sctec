@@ -3,6 +3,10 @@
 A API SCTEC é um sistema de gerenciamento de **Empreendimentos** e seus respectivos **Sócios**, criada especialmente para o programa SCTEC. 
 Foi desenvolvida utilizando Spring Boot 3, Java 17, Spring Data JPA e MapStruct.
 
+## Link Video Pitch
+
+- ### https://www.youtube.com/watch?v=9seBgLUkAN8
+
 ## 📌 Acesso Rápido
 
 - **Base URL (Local):** `http://localhost:8080`
